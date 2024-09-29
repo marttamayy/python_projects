@@ -120,11 +120,18 @@ print(display)
 str_display = ""
 guessed = False
 
+letters_guessed = ""
+
 while str_display != chosen_word and end_of_game == False: # while the display and chosen word are not the same the loop keeps going
 
     guess = input("Guess a letter: ").lower()
 
     counter = 0
+
+    if letters_guessed == "":
+        letters_guessed = letters_guessed + guess
+    else:
+        letters_guessed = letters_guessed + ", " + guess
     
     while counter < len(chosen_word):
         if chosen_word[counter] == guess:
@@ -133,6 +140,7 @@ while str_display != chosen_word and end_of_game == False: # while the display a
             guessed = True
         else:
             counter += 1
+            
 
     if guessed == False:
         lives -= 1
@@ -145,10 +153,10 @@ while str_display != chosen_word and end_of_game == False: # while the display a
         print("YOU LOST.")
         end_of_game = True # end of the game because you lost
 
-    
     str_display = ''.join(display)
 
     print(stages[lives])
+    print(f"You have used {letters_guessed}")
     print(f"You have {lives} lives.")
     print(display)
 
